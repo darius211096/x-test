@@ -1,0 +1,40 @@
+<form class="crypto-form" [formGroup]="filterForm" (ngSubmit)="onSubmit()">
+    <div class="crypto-form__filter">
+        <mat-form-field>
+            <mat-label>Min Trade Volume (USD)</mat-label>
+            <input matInput id="minTradeVolume" formControlName="minTradeVolume" type="number">
+        </mat-form-field>
+    </div>
+    <div class="form__filter">
+        <mat-form-field>
+            <mat-label>Max Trade Volume (USD)</mat-label>
+            <input matInput id="maxTradeVolume" formControlName="maxTradeVolume" type="number">
+        </mat-form-field>
+    </div>
+    <div class="form__filter">
+        <mat-form-field>
+            <mat-label>Min Price Change (%)</mat-label>
+            <input matInput id="minPriceChange" formControlName="minPriceChange" type="number">
+        </mat-form-field>
+    </div>
+    <div class="form__filter">
+        <mat-form-field>
+            <mat-label>Max Price Change (%)</mat-label>
+            <input matInput id="maxPriceChange" formControlName="maxPriceChange" type="number">
+        </mat-form-field>
+    </div>
+    <div class="form__filter">
+        <mat-form-field>
+            <mat-label>Min Price (USD)</mat-label>
+            <input matInput id="minPrice" formControlName="minPrice" type="number">
+        </mat-form-field>
+    </div>
+    <div class="form__filter">
+        <mat-form-field>
+            <mat-label>Max Price (USD)</mat-label>
+            <input matInput id="maxPrice" formControlName="maxPrice" type="number">
+        </mat-form-field>
+    </div>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="filterForm.invalid">Apply Filters</button>
+</form>
