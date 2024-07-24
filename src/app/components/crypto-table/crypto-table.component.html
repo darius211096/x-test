@@ -1,14 +1,37 @@
-<mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+<ng-container *ngIf="(cryptoService.getFilteredData() | async) as cryptoData; else errorState">
+    <cdk-virtual-scroll-viewport itemSize="56" class="viewport">
+        <mat-table 
+            *ngIf="cryptoData.length; else emptyState" 
+            [dataSource]="cryptoData" 
+            class="mat-elevation-z8"
+            [trackBy]="trackBySymbol"
+        >
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        
+            <ng-container matColumnDef="name">
+                <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.s}} </mat-cell>
+            </ng-container>
+        
+            <ng-container matColumnDef="price">
+                <mat-header-cell *matHeaderCellDef> Current Price </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.c}} </mat-cell>
+            </ng-container>
+        </mat-table>
+    </cdk-virtual-scroll-viewport>
+</ng-container>
 
-    <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
-    </ng-container>
+<ng-template #emptyState>
+    <div class="empty-state">
+      <mat-icon>info</mat-icon>
+      <p>No data available</p>
+    </div>
+</ng-template>
 
-    <ng-container matColumnDef="price">
-        <mat-header-cell *matHeaderCellDef> Price </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.price}} </mat-cell>
-    </ng-container>
-</mat-table>
+<ng-template #errorState>
+    <div class="error-state">
+      <mat-icon>error</mat-icon>
+      <p>Something went wrong</p>
+    </div>
+</ng-template>

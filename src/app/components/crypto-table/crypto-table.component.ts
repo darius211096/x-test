@@ -1,27 +1,32 @@
-import { Component } from '@angular/core';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { AsyncPipe, NgIf } from '@angular/common';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
-
-export interface CryptoCurrency {
-  name: string;
-  price: number;
-}
-
-const ELEMENT_DATA: CryptoCurrency[] = [
-  { name: 'Bitcoin', price: 40000 },
-  { name: 'Ethereum', price: 2500 },
-  { name: 'Ripple', price: 0.75 },
-];
+import { CryptoService } from '@services';
 
 @Component({
   selector: 'app-crypto-table',
   standalone: true,
   imports: [
-    MatTableModule
+    MatTableModule, 
+    AsyncPipe, 
+    NgIf, 
+    MatIconModule,
+    ScrollingModule
   ],
   templateUrl: './crypto-table.component.html',
-  styleUrl: './crypto-table.component.scss'
+  styleUrl: './crypto-table.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CryptoTableComponent {
   displayedColumns: string[] = ['name', 'price'];
-  dataSource = ELEMENT_DATA;
+
+  constructor(
+    public cryptoService: CryptoService
+  ) {}
+
+  public trackBySymbol(index: number, item: any): string {
+    return item.s;
+  }
 }

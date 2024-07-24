@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { CryptoTableComponent, DialogWindowComponent } from '@components';
-import { WebsocketConnectionService } from '@services';
+import { CryptoService, WebsocketConnectionService } from '@services';
 
 @Component({
   selector: 'app-crypto-screener-page',
@@ -17,24 +17,21 @@ import { WebsocketConnectionService } from '@services';
 export class CryptoScreenerPageComponent {
   constructor(
     public dialog: MatDialog,
-    private websocketConnection: WebsocketConnectionService
+    private websocketConnection: WebsocketConnectionService,
   ) {}
 
-  public ngOnInit() {
-    // this.websocketConnection.
+  public ngOnInit(): void {
+    this.websocketConnection.connect();
+  }
+
+  public ngOnDestroy(): void {
+    this.websocketConnection.disconnect();
   }
 
   public openFilterDialog(): void {
-    const dialogRef = this.dialog.open(DialogWindowComponent, {
+    this.dialog.open(DialogWindowComponent, {
       maxWidth: '500px',
       height: '300px'
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-      if (result) {
-        // this.applyFilters(result);
-      }
     });
   }
 }

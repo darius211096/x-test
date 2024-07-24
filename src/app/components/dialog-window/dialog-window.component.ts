@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CryptoFiltersFormComponent } from '../crypto-filters-form/crypto-filters-form.component';
 
 @Component({
@@ -6,8 +6,7 @@ import { CryptoFiltersFormComponent } from '../crypto-filters-form/crypto-filter
   standalone: true,
   imports: [CryptoFiltersFormComponent],
   templateUrl: './dialog-window.component.html',
-  styleUrl: './dialog-window.component.scss'
+  styleUrl: './dialog-window.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DialogWindowComponent {
-  
-}
+export class DialogWindowComponent {}

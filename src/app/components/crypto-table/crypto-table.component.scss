@@ -1,4 +1,15 @@
+.viewport {
+    height: 600px;
+    width: 100%;
+}
+
 .table-container {
     max-width: 800px;
     margin: 20px auto;
+}
+
+.empty-state, .error-state {
+    color: purple;
+    text-align: center;
+    margin: 0 auto;
 }
