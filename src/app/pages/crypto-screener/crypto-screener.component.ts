@@ -31,7 +31,6 @@ export class CryptoScreenerPageComponent {
   public openFilterDialog(): void {
     this.dialog.open(DialogWindowComponent, {
       maxWidth: '500px',
-      height: '300px'
     });
   }
 }
